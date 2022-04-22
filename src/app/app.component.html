@@ -7,8 +7,8 @@
     <option value="address">address</option>
   </select>
   <ng-container [ngSwitch]="selectControl?.value">
-    <app-basic-info *ngSwitchCase="'basic'" [form]="selectedProtocol"></app-basic-info>
-    <app-address *ngSwitchCase="'address'" [form]="selectedProtocol"></app-address>
+    <app-basic-info *ngSwitchCase="'basic'" [form]="selectedProtocol!"></app-basic-info>
+    <app-address *ngSwitchCase="'address'" [form]="selectedProtocol!"></app-address>
   </ng-container>
 </form>
 

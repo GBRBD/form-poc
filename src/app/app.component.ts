@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormService} from "./form.service";
 
 @Component({
   selector: 'app-root',
@@ -9,21 +10,9 @@ import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class AppComponent implements OnInit {
   selectedProtocol: FormGroup | null = null
 
-  form = this.fb.group({
-    select: [null, [Validators.required]],
-    protocols: this.fb.array([
-      this.fb.group({
-        id: 'basic',
-        name: [null, [Validators.required]]
-      }),
-      this.fb.group({
-        id: 'address',
-        city: [null, [Validators.required]]
-      })
-    ]),
-  });
+  form = this.formService.form
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private formService: FormService) {
   }
 
   ngOnInit(): void {
@@ -31,7 +20,9 @@ export class AppComponent implements OnInit {
     this.selectControl?.valueChanges.subscribe(() => {
       this.disableProtocols()
       this.selectedProtocol = this.protocolsControl?.controls.find(x => x.value.id === this.selectControl?.value) as FormGroup;
-      this.selectedProtocol.enable()
+      if (this.selectedProtocol) {
+        this.selectedProtocol.enable()
+      }
     })
   }
 
