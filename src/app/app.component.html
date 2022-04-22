@@ -7,15 +7,10 @@
     <option value="address">address</option>
   </select>
   <ng-container [ngSwitch]="selectControl?.value">
-    <app-basic-info *ngSwitchCase="'basic'" formGroupName="basic"></app-basic-info>
-    <app-address *ngSwitchCase="'address'" formGroupName="address"></app-address>
+    <app-basic-info *ngSwitchCase="'basic'" [form]="selectedProtocol"></app-basic-info>
+    <app-address *ngSwitchCase="'address'" [form]="selectedProtocol"></app-address>
   </ng-container>
-
-<!--  <app-basic-info formGroupName="basic"></app-basic-info>-->
-<!--  <app-address formGroupName="address"></app-address>-->
-
 </form>
-
 
 <button (click)="onSubmit()" [disabled]="!form.valid">Submit</button>
 <button (click)="getForm()">log form</button>
